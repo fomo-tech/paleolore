@@ -1,5 +1,5 @@
 import { findMongoArticle, listMongoArticles } from "./mongo";
-import { sampleArticles, type Article } from "./content";
+import { applyEditorialContent, sampleArticles, type Article } from "./content";
 import { fetchReferenceArticle } from "./reference-remote";
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
@@ -18,7 +18,7 @@ function isoDate(value: string) {
 
 export async function getArticles(options?: { includeDrafts?: boolean }) {
   const mongoArticles = await listMongoArticles();
-  const articles = mongoArticles?.length ? mongoArticles : sampleArticles;
+  const articles = mongoArticles?.length ? mongoArticles.map(applyEditorialContent) : sampleArticles;
   return options?.includeDrafts ? articles : articles.filter((article) => article.status !== "draft");
 }
 
@@ -26,7 +26,7 @@ export async function getPublishedArticles() { return getArticles(); }
 
 export async function getArticleBySlug(slug: string) {
   const mongoArticle = await findMongoArticle(slug);
-  if (mongoArticle) return mongoArticle;
+  if (mongoArticle) return applyEditorialContent(mongoArticle);
   const localArticle = sampleArticles.find((article) => article.slug === slug);
   if (localArticle) return localArticle;
   return fetchReferenceArticle(slug);

@@ -40,32 +40,40 @@ export function getArticleExcerpt(article: { excerpt: string; content: string })
   return candidate.slice(0, 217).replace(/\s+\S*$/, "").trim() + "…";
 }
 
+export function applyEditorialContent(article: Article): Article {
+  const editorial = editorialBySlug.get(article.slug);
+  if (!editorial) return article;
+  return {
+    ...article,
+    excerpt: editorial.excerpt,
+    content: editorial.content,
+    readingTime: Math.max(3, Math.ceil(editorial.content.split(/\s+/).filter(Boolean).length / 190)) + " min read",
+    author: "The Archaeologist Editorial Desk",
+  };
+}
+
 export const categories: Category[] = [
   ...referenceSite.categories.map((category) => ({ name: category.name, slug: category.slug, eyebrow: category.eyebrow })),
   { name: "Prehistory", slug: "prehistory", eyebrow: "PREHISTORY", filterSlug: "latest-discoveries" },
   { name: "Civilizations", slug: "civilizations", eyebrow: "CIVILIZATIONS", filterSlug: "archaeology-greatest-finds" },
 ];
 
-export const sampleArticles: Article[] = referenceSite.articles.map((article, index) => {
-  const editorial = editorialBySlug.get(article.slug);
-  const content = editorial?.content || article.content;
-  return {
-    slug: article.slug,
-    title: article.title,
-    excerpt: editorial?.excerpt || getArticleExcerpt({ excerpt: article.excerpt, content }),
-    content,
-    category: article.category,
-    categorySlug: article.categorySlug,
-    era: article.era,
-    date: article.date,
-    readingTime: Math.max(3, Math.ceil(content.split(/\s+/).filter(Boolean).length / 190)) + " min read",
-    author: editorial ? "The Archaeologist Editorial Desk" : article.author,
-    image: article.image,
-    sourceUrl: article.sourceUrl,
-    sourceImageUrl: article.sourceImageUrl,
-    featured: index === 0,
-    status: "published",
-  };
-});
+export const sampleArticles: Article[] = referenceSite.articles.map((article, index) => applyEditorialContent({
+  slug: article.slug,
+  title: article.title,
+  excerpt: article.excerpt,
+  content: article.content,
+  category: article.category,
+  categorySlug: article.categorySlug,
+  era: article.era,
+  date: article.date,
+  readingTime: article.readingTime,
+  author: article.author,
+  image: article.image,
+  sourceUrl: article.sourceUrl,
+  sourceImageUrl: article.sourceImageUrl,
+  featured: index === 0,
+  status: "published",
+}));
 
 export function getCategory(slug: string) { return categories.find((category) => category.slug === slug); }
