@@ -7,7 +7,7 @@ import { ArticleCard } from "@/components/article-card";
 import { SiteHeader } from "@/components/site-header";
 import { articleToJsonLd, getArticleBySlug, getPublishedArticles } from "@/lib/articles";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.org").replace(/\/$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
 
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";
@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: image ? [{ url: image, alt: article.title }] : undefined,
     },
     twitter: { card: image ? "summary_large_image" : "summary", title: article.title, description: article.excerpt, images: image ? [image] : undefined },
+    robots: article.archivePlaceholder ? { index: false, follow: true } : undefined,
   };
 }
 

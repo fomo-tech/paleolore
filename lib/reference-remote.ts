@@ -32,7 +32,7 @@ function titleFromSlug(slug: string) { return slug.split("-").map((part) => part
 
 function archivePlaceholder(slug: string): Article {
   const sourceUrl = referenceSitemap.find((url) => url.endsWith("/blog/" + slug));
-  return { slug, title: titleFromSlug(slug), excerpt: "This field note is indexed in the full Archaeologist archive.", content: "This archive entry is available in the full reference archive. Open the original source to read the complete field note and view its media.", category: "Latest Discoveries", categorySlug: "latest-discoveries", era: "Archaeology", date: "", readingTime: "5 min read", author: "The Archaeologist", sourceUrl, status: "published" };
+  return { slug, title: titleFromSlug(slug), excerpt: "This field note is indexed in the full Archaeologist archive.", content: "This archive entry is available in the full reference archive. Open the original source to read the complete field note and view its media.", category: "Latest Discoveries", categorySlug: "latest-discoveries", era: "Archaeology", date: "", readingTime: "5 min read", author: "The Archaeologist", sourceUrl, status: "published", archivePlaceholder: true };
 }
 
 export async function fetchReferenceArticle(slug: string): Promise<Article | null> {

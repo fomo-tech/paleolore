@@ -1,6 +1,24 @@
 import type { MetadataRoute } from "next";
-import referenceSitemap from "@/data/reference-sitemap.json";
 import { categories } from "@/lib/content";
 import { getPublishedArticles } from "@/lib/articles";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> { const articles = await getPublishedArticles(); const localUrls = [{ url: "https://thearchaeologist.org", lastModified: new Date() }, { url: "https://thearchaeologist.org/blog", lastModified: new Date() }, { url: "https://thearchaeologist.org/about", lastModified: new Date() }, ...categories.map((category) => ({ url: `https://thearchaeologist.org/categories/${category.slug}`, lastModified: new Date() })), ...articles.map((article) => ({ url: `https://thearchaeologist.org/blog/${article.slug}`, lastModified: new Date() }))]; const known = new Set(localUrls.map((item) => item.url)); const archiveUrls = referenceSitemap.filter((url) => !known.has(url)).map((url) => ({ url: url.replace("https://www.thearchaeologist.org", "https://thearchaeologist.org"), lastModified: new Date() })); return [...localUrls, ...archiveUrls]; }
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
+
+function dateValue(value: string) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? new Date() : date;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const articles = await getPublishedArticles();
+  const usedCategories = categories.filter((category) => !category.filterSlug && articles.some((article) => article.categorySlug === category.slug));
+  const staticUrls: MetadataRoute.Sitemap = [
+    { url: siteUrl + "/", lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+    { url: siteUrl + "/blog", lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+    { url: siteUrl + "/about", lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: siteUrl + "/privacy", lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    ...usedCategories.map((category) => ({ url: siteUrl + "/categories/" + category.slug, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 })),
+  ];
+  const articleUrls = articles.map((article) => ({ url: siteUrl + "/blog/" + article.slug, lastModified: dateValue(article.date), changeFrequency: "monthly" as const, priority: article.featured ? 0.9 : 0.7 }));
+  return [...staticUrls, ...articleUrls];
+}

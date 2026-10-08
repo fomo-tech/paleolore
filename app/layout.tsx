@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.org").replace(/\/$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
 const siteTitle = "The Archaeologist — Archaeology & Prehistory Magazine";
 const siteDescription = "An independent English magazine about archaeology, prehistory, artifacts, paleontology and ancient civilizations.";
+const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -43,5 +44,5 @@ const structuredData = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} /></body></html>;
+  return <html lang="en"><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />{adsenseClient && <script async src={"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + encodeURIComponent(adsenseClient)} crossOrigin="anonymous" />}</body></html>;
 }

@@ -2,7 +2,7 @@ import { findMongoArticle, listMongoArticles } from "./mongo";
 import { sampleArticles, type Article } from "./content";
 import { fetchReferenceArticle } from "./reference-remote";
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.org").replace(/\/$/, "");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
 
 function absoluteUrl(value?: string) {
   if (!value) return undefined;

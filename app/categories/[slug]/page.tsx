@@ -8,7 +8,12 @@ import { getCategory } from "@/lib/content";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const category = getCategory((await params).slug);
   if (!category) return {};
-  return { title: category.name, description: "Explore " + category.name.toLowerCase() + " stories from The Archaeologist archive.", alternates: { canonical: "/categories/" + category.slug } };
+  return {
+    title: category.name,
+    description: "Explore " + category.name.toLowerCase() + " stories from The Archaeologist archive.",
+    alternates: { canonical: "/categories/" + category.slug },
+    robots: category.filterSlug ? { index: false, follow: true } : undefined,
+  };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -20,6 +20,7 @@ export type Article = {
   status?: "draft" | "published";
   seoTitle?: string;
   seoDescription?: string;
+  archivePlaceholder?: boolean;
 };
 
 function cleanText(value = "") {
