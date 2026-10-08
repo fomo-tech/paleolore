@@ -1,3 +1,5 @@
 import { SiteHeader } from "@/components/site-header";
-export const metadata = { title: "Quyền riêng tư" };
-export default function PrivacyPage() { return <><SiteHeader /><main className="shell about-page"><span className="eyebrow">READER POLICY</span><h1>Quyền riêng tư</h1><div className="about-copy"><div><p>Trang này chỉ sử dụng dữ liệu cần thiết để vận hành bản tin, CMS và đo lường hiệu quả nội dung. Không bán thông tin cá nhân của độc giả.</p><p>Nếu bật quảng cáo, một số đối tác quảng cáo có thể sử dụng cookie hoặc công nghệ tương tự theo chính sách riêng của họ.</p></div><div className="manifesto"><span className="eyebrow">Liên hệ</span><p>Để hỏi về dữ liệu cá nhân hoặc nội dung trên trang, hãy liên hệ ban biên tập qua email quản trị của website.</p></div></div></main></> }
+
+export const metadata = { title: "Privacy" };
+
+export default function PrivacyPage() { return <><SiteHeader /><main className="shell about-page"><span className="eyebrow">READER POLICY</span><h1>Privacy</h1><div className="about-copy"><div><p>This site uses only the data needed to operate the newsletter, CMS and content measurement. We do not sell reader information.</p><p>If advertising is enabled, some advertising partners may use cookies or similar technologies under their own policies.</p></div><div className="manifesto"><span className="eyebrow">Contact</span><p>For questions about personal data or content on this site, contact the editorial desk through the website administrator email.</p></div></div></main></>; }

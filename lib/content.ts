@@ -17,41 +17,41 @@ export type Article = {
 };
 
 export const categories = [
-  { name: "Phát hiện mới", slug: "phat-hien-moi", eyebrow: "DISCOVERIES" },
-  { name: "Tiền sử nhân loại", slug: "tien-su", eyebrow: "PREHISTORY" },
-  { name: "Nền văn minh", slug: "nen-van-minh", eyebrow: "CIVILIZATIONS" },
+  { name: "Latest Discoveries", slug: "latest-discoveries", eyebrow: "DISCOVERIES" },
+  { name: "Human Prehistory", slug: "prehistory", eyebrow: "PREHISTORY" },
+  { name: "Ancient Civilizations", slug: "civilizations", eyebrow: "CIVILIZATIONS" },
   { name: "Paleontology", slug: "paleontology", eyebrow: "DEEP TIME" },
-  { name: "Di vật & kỹ thuật", slug: "di-vat", eyebrow: "ARTIFACTS" },
+  { name: "Artifacts & Technology", slug: "artifacts", eyebrow: "ARTIFACTS" },
 ];
 
 export const sampleArticles: Article[] = [
   {
     slug: "dau-tich-lua-co-xua-trong-hang-da",
-    title: "Dấu tích lửa cổ xưa kể lại cách con người đầu tiên sống qua mùa đông",
-    excerpt: "Một lớp tro mỏng, vài mảnh xương cháy và những viên đá nứt nhiệt đang mở lại câu chuyện về bếp lửa tiền sử.",
-    content: "Trong lòng một hang đá nhìn xuống thung lũng khô cằn, nhóm khảo cổ đã tìm thấy một dải trầm tích chỉ rộng bằng bàn tay. Nó không gây ấn tượng ngay lập tức: tro vụn, xương động vật đã đổi màu và những mảnh đá nhỏ bị nứt vì nhiệt. Nhưng chính sự sắp xếp của chúng cho thấy đây không phải một đám cháy tự nhiên.\n\nBếp lửa được lặp lại ở cùng một vị trí qua nhiều lớp đất. Điều đó gợi ý một nhóm người đã quay trở lại nơi trú ẩn này trong nhiều mùa, mang theo thức ăn, công cụ và một ký ức về địa điểm an toàn.\n\nKhi đọc một di chỉ như vậy, nhà khảo cổ không chỉ hỏi “đã tìm thấy gì?”. Họ còn hỏi ai đã nhóm lửa, họ ngồi ở đâu, và những thay đổi nhỏ của vật liệu có thể nói gì về khí hậu quanh họ. Một mẩu than bé xíu đôi khi là mốc thời gian đáng tin hơn cả một câu chuyện truyền miệng.",
-    category: "Tiền sử nhân loại", categorySlug: "tien-su", era: "Kỷ Pleistocene", date: "08.10.2026", readingTime: "6 phút đọc", author: "Ban biên tập The Archaeologist", featured: true, status: "published",
+    title: "Ancient Fire Marks Reveal How Early Humans Survived Winter",
+    excerpt: "A thin layer of ash, burned bone fragments and heat-cracked stones reopen the story of a prehistoric hearth.",
+    content: "Inside a cave overlooking a dry valley, archaeologists found a band of sediment no wider than a hand. It made little impression at first: fine ash, discolored animal bones and small stones fractured by heat. Yet their arrangement showed that this was not a natural fire.\n\nThe hearth was rebuilt in the same place across several layers of soil. That suggests a group returned to the shelter season after season, carrying food, tools and a shared memory of a safe place.\n\nWhen archaeologists read a site like this, they do not ask only what was found. They also ask who kept the fire alive, where people sat and what small changes in the material can reveal about the climate around them. A tiny charcoal fragment can sometimes mark time more reliably than a story passed down by word of mouth.",
+    category: "Human Prehistory", categorySlug: "prehistory", era: "Pleistocene", date: "08.10.2026", readingTime: "6 min read", author: "The Archaeologist Editorial Desk", featured: true, status: "published",
   },
   {
     slug: "thanh-pho-chim-duoi-long-dat",
-    title: "Thành phố chìm dưới lòng đất và bài toán về một xã hội biết thích nghi",
-    excerpt: "Các đường hầm nối tiếp nhau cho thấy cư dân cổ đại đã biến địa chất khắc nghiệt thành một hệ thống phòng thủ sống động.",
-    content: "Một đô thị dưới lòng đất không được tạo ra chỉ để gây kinh ngạc. Nó là câu trả lời của con người trước khí hậu, chiến tranh và nhu cầu tổ chức cuộc sống trong một không gian có giới hạn.\n\nNhững khoang chứa lương thực nằm gần trục thông gió, còn các lối đi hẹp có thể kiểm soát số người ra vào. Dấu vết này cho thấy kiến trúc không tách rời khỏi chính trị và sinh tồn.",
-    category: "Nền văn minh", categorySlug: "nen-van-minh", era: "Thời đại đồ đồng", date: "06.10.2026", readingTime: "5 phút đọc", author: "Minh Anh", status: "published",
+    title: "The City Beneath the Ground and the Architecture of Adaptation",
+    excerpt: "A chain of underground passages shows how ancient residents turned harsh geology into a living defense system.",
+    content: "An underground city was not built simply to inspire wonder. It was a human answer to climate, conflict and the need to organize daily life inside a limited space.\n\nFood stores sit close to ventilation shafts, while narrow passages could control how many people entered or left. The evidence suggests that architecture was never separate from politics and survival.",
+    category: "Ancient Civilizations", categorySlug: "civilizations", era: "Bronze Age", date: "06.10.2026", readingTime: "5 min read", author: "The Archaeologist Lab", status: "published",
   },
   {
     slug: "bo-xuong-thu-san-co-dai",
-    title: "Bộ xương thú săn cổ đại hé lộ một hệ sinh thái đã biến mất",
-    excerpt: "Từ những chiếc răng mòn đến dấu cắn trên xương, paleontology đang dựng lại mạng lưới săn mồi của một vùng đất xa xưa.",
-    content: "Hóa thạch không phải là bức ảnh tĩnh của quá khứ. Mỗi bề mặt bị mài mòn, mỗi vết cắn và lớp khoáng hóa đều ghi lại một tương tác. Khi đặt chúng cạnh nhau, các nhà nghiên cứu có thể hình dung một hệ sinh thái từng vận hành như thế nào.",
-    category: "Paleontology", categorySlug: "paleontology", era: "Kỷ Miocene", date: "02.10.2026", readingTime: "4 phút đọc", author: "The Archaeologist Lab", status: "published",
+    title: "The Ancient Predator Skeleton That Reveals a Lost Ecosystem",
+    excerpt: "From worn teeth to bite marks on bone, paleontology is rebuilding the food web of a vanished landscape.",
+    content: "A fossil is not a still photograph of the past. Every worn surface, bite mark and mineral layer records an interaction. When researchers place these traces side by side, they can begin to imagine how an ecosystem once worked.",
+    category: "Paleontology", categorySlug: "paleontology", era: "Miocene", date: "02.10.2026", readingTime: "4 min read", author: "The Archaeologist Lab", status: "published",
   },
   {
     slug: "ngon-ngu-cua-nhung-manh-gom",
-    title: "Ngôn ngữ của những mảnh gốm vỡ",
-    excerpt: "Một chiếc bình không cần còn nguyên vẹn để nói về thương mại, nghi lễ và bàn tay đã tạo ra nó.",
-    content: "Mảnh gốm là loại bằng chứng khiêm nhường nhưng bền bỉ. Hoa văn, đất sét, dấu vân tay và lớp cháy trên thành bình tạo thành một hồ sơ vật chất về đời sống thường nhật.",
-    category: "Di vật & kỹ thuật", categorySlug: "di-vat", era: "Thời kỳ Đồ sắt", date: "28.09.2026", readingTime: "4 phút đọc", author: "Linh Chi", status: "published",
+    title: "The Language of Broken Pottery",
+    excerpt: "A vessel does not need to be whole to speak about trade, ritual and the hands that shaped it.",
+    content: "Pottery fragments are humble but persistent evidence. Patterns, clay, fingerprints and fire marks on a vessel form a material record of everyday life.",
+    category: "Artifacts & Technology", categorySlug: "artifacts", era: "Iron Age", date: "28.09.2026", readingTime: "4 min read", author: "The Archaeologist Lab", status: "published",
   },
 ];
 

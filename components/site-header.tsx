@@ -1,3 +1,11 @@
 import Link from "next/link";
-const nav = [["Khám phá", "/blog"], ["Tiền sử", "/categories/tien-su"], ["Nền văn minh", "/categories/nen-van-minh"], ["Paleontology", "/categories/paleontology"]];
-export function SiteHeader() { return <header className="site-header"><div className="topline"><span>GHI CHÉP TỪ NHỮNG LỚP ĐẤT CŨ</span><span className="topline-right">Tạp chí khảo cổ học · 2026</span></div><div className="masthead shell"><Link href="/" className="brand" aria-label="The Archaeologist - Trang chủ"><span className="brand-logo-wrap"><img className="brand-logo" src="/archaeologist-logo.png" alt="" /></span><span><strong>THE</strong><b>ARCHAEOLOGIST</b></span></Link><div className="masthead-note">Lịch sử không biến mất.<br />Nó chỉ nằm sâu hơn.</div><Link href="/admin" className="editor-link">CMS / BIÊN TẬP</Link></div><nav className="main-nav shell" aria-label="Điều hướng chính">{nav.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}<Link href="/about">Về chúng tôi</Link><Link href="/blog" className="nav-search">Tìm trong lưu trữ <span aria-hidden="true">⌕</span></Link></nav></header>; }
+
+const nav = [["Explore", "/blog"], ["Prehistory", "/categories/prehistory"], ["Civilizations", "/categories/civilizations"], ["Paleontology", "/categories/paleontology"]];
+
+export function SiteHeader() {
+  return <header className="site-header">
+    <div className="topline"><span>FIELD NOTES FROM THE OLDEST LAYERS</span><span className="topline-right">Archaeology magazine · 2026</span></div>
+    <div className="masthead shell"><Link href="/" className="brand" aria-label="The Archaeologist - Home"><span className="brand-logo-wrap"><img className="brand-logo" src="/archaeologist-logo.png" alt="" /></span><span><strong>THE</strong><b>ARCHAEOLOGIST</b></span></Link><div className="masthead-note">History does not disappear.<br />It simply lies deeper.</div><Link href="/admin" className="editor-link">CMS / EDITORIAL</Link></div>
+    <nav className="main-nav shell" aria-label="Main navigation">{nav.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}<Link href="/about">About us</Link><Link href="/blog" className="nav-search">Search the archive <span aria-hidden="true">⌕</span></Link></nav>
+  </header>;
+}
