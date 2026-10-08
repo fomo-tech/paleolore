@@ -22,6 +22,20 @@ export type Article = {
   seoDescription?: string;
 };
 
+function cleanText(value = "") {
+  return value.replace(/^Introduction\s+/i, "").replace(/\s+/g, " ").trim();
+}
+
+export function getArticleExcerpt(article: { excerpt: string; content: string }) {
+  const source = cleanText(article.content || article.excerpt);
+  const sentences = source.match(/[^.!?]+[.!?]+/g) || [];
+  const candidate = cleanText(sentences.slice(0, 2).join(" ") || source);
+  if (candidate.length <= 220) return candidate;
+  const firstSentence = cleanText(sentences[0] || "");
+  if (firstSentence && firstSentence.length <= 260) return firstSentence;
+  return candidate.slice(0, 217).replace(/\s+\S*$/, "").trim() + "…";
+}
+
 export const categories: Category[] = [
   ...referenceSite.categories.map((category) => ({ name: category.name, slug: category.slug, eyebrow: category.eyebrow })),
   { name: "Prehistory", slug: "prehistory", eyebrow: "PREHISTORY", filterSlug: "latest-discoveries" },
@@ -31,7 +45,7 @@ export const categories: Category[] = [
 export const sampleArticles: Article[] = referenceSite.articles.map((article, index) => ({
   slug: article.slug,
   title: article.title,
-  excerpt: article.excerpt.replace(/^Introduction\s+/i, ""),
+  excerpt: getArticleExcerpt({ excerpt: article.excerpt, content: article.content }),
   content: article.content,
   category: article.category,
   categorySlug: article.categorySlug,
