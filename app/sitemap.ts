@@ -1,0 +1,4 @@
+import type { MetadataRoute } from "next";
+import { getPublishedArticles } from "@/lib/articles";
+import { categories } from "@/lib/content";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> { const articles = await getPublishedArticles(); return [{ url: "https://thearchaeologist.org", lastModified: new Date() }, { url: "https://thearchaeologist.org/blog", lastModified: new Date() }, { url: "https://thearchaeologist.org/about", lastModified: new Date() }, ...categories.map((category) => ({ url: `https://thearchaeologist.org/categories/${category.slug}`, lastModified: new Date() })), ...articles.map((article) => ({ url: `https://thearchaeologist.org/blog/${article.slug}`, lastModified: new Date() }))]; }

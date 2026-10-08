@@ -1,0 +1,1 @@
+export function AdSlot({ label = "Vị trí quảng cáo" }: { label?: string }) { return <div className="ad-slot" aria-label={label} data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT || undefined}><span>{label}</span><small>300 × 250</small></div>; }

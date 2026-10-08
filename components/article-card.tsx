@@ -1,0 +1,3 @@
+import Link from "next/link";
+import type { Article } from "@/lib/content";
+export function ArticleCard({ article, featured = false }: { article: Article; featured?: boolean }) { return <article className={featured ? "article-card article-card-featured" : "article-card"}><div className="article-image" aria-hidden="true"><span className="image-label">{article.era}</span><span className="image-glyph">{featured ? "◒" : "⌘"}</span></div><div className="article-card-body"><div className="article-meta"><span>{article.category}</span><span>{article.readingTime}</span></div><h3><Link href={`/blog/${article.slug}`}>{article.title}</Link></h3><p>{article.excerpt}</p><div className="article-byline"><span>{article.author}</span><span>{article.date}</span></div></div></article>; }
