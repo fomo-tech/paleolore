@@ -5,6 +5,9 @@ import { AdSlot } from "@/components/ad-slot";
 import { SiteHeader } from "@/components/site-header";
 import { articleToJsonLd, getArticleBySlug, getPublishedArticles } from "@/lib/articles";
 
+export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() { return (await getPublishedArticles()).map((article) => ({ slug: article.slug })); }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const article = await getArticleBySlug((await params).slug); if (!article) return {}; return { title: article.seoTitle || article.title, description: article.seoDescription || article.excerpt, openGraph: { type: "article", title: article.title, description: article.excerpt, images: article.image ? [article.image] : undefined } }; }
 

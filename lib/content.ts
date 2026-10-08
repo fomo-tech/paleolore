@@ -1,5 +1,6 @@
 import referenceSite from "@/data/reference-site.json";
 
+export type Category = { name: string; slug: string; eyebrow: string; filterSlug?: string };
 export type Article = {
   id?: string;
   slug: string;
@@ -21,16 +22,16 @@ export type Article = {
   seoDescription?: string;
 };
 
-export const categories = referenceSite.categories.map((category) => ({
-  name: category.name,
-  slug: category.slug,
-  eyebrow: category.eyebrow,
-}));
+export const categories: Category[] = [
+  ...referenceSite.categories.map((category) => ({ name: category.name, slug: category.slug, eyebrow: category.eyebrow })),
+  { name: "Prehistory", slug: "prehistory", eyebrow: "PREHISTORY", filterSlug: "latest-discoveries" },
+  { name: "Civilizations", slug: "civilizations", eyebrow: "CIVILIZATIONS", filterSlug: "archaeology-greatest-finds" },
+];
 
 export const sampleArticles: Article[] = referenceSite.articles.map((article, index) => ({
   slug: article.slug,
   title: article.title,
-  excerpt: article.excerpt,
+  excerpt: article.excerpt.replace(/^Introduction\s+/i, ""),
   content: article.content,
   category: article.category,
   categorySlug: article.categorySlug,

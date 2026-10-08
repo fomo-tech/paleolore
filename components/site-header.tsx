@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const nav = [["Explore", "/blog"], ["Prehistory", "/categories/prehistory"], ["Civilizations", "/categories/civilizations"], ["Paleontology", "/categories/paleontology"]];
+const nav = [["Explore", "/blog"], ["Discoveries", "/categories/latest-discoveries"], ["Ancient worlds", "/categories/archaeology-greatest-finds"], ["Paleontology", "/categories/paleontology"]];
 
 export function SiteHeader() {
   return <header className="site-header">
