@@ -10,7 +10,7 @@ function dateValue(value: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articles = await getPublishedArticles();
+  const articles = (await getPublishedArticles()).filter((article) => !article.archivePlaceholder);
   const usedCategories = categories.filter((category) => !category.filterSlug && articles.some((article) => article.categorySlug === category.slug));
   const staticUrls: MetadataRoute.Sitemap = [
     { url: siteUrl + "/", lastModified: new Date(), changeFrequency: "weekly", priority: 1 },

@@ -25,6 +25,7 @@ export type Article = {
 };
 
 const editorialBySlug = new Map(editorialContent.articles.map((article) => [article.slug, article]));
+const REFERENCE_ORIGIN = "https://www.thearchaeologist.org/";
 
 function cleanText(value = "") {
   return value.replace(/^Introduction\s+/i, "").replace(/\s+/g, " ").trim();
@@ -42,13 +43,23 @@ export function getArticleExcerpt(article: { excerpt: string; content: string })
 
 export function applyEditorialContent(article: Article): Article {
   const editorial = editorialBySlug.get(article.slug);
-  if (!editorial) return article;
+  if (editorial) {
+    return {
+      ...article,
+      excerpt: editorial.excerpt,
+      content: editorial.content,
+      readingTime: Math.max(3, Math.ceil(editorial.content.split(/\s+/).filter(Boolean).length / 190)) + " min read",
+      author: "The Archaeologist Editorial Desk",
+    };
+  }
+  if (!article.sourceUrl?.startsWith(REFERENCE_ORIGIN)) return article;
   return {
     ...article,
-    excerpt: editorial.excerpt,
-    content: editorial.content,
-    readingTime: Math.max(3, Math.ceil(editorial.content.split(/\s+/).filter(Boolean).length / 190)) + " min read",
+    excerpt: "This archive entry is awaiting an original editorial note.",
+    content: "This archive entry is not published until it has been independently researched and written by The Archaeologist editorial team.",
+    readingTime: "1 min read",
     author: "The Archaeologist Editorial Desk",
+    archivePlaceholder: true,
   };
 }
 
@@ -61,14 +72,14 @@ export const categories: Category[] = [
 export const sampleArticles: Article[] = referenceSite.articles.map((article, index) => applyEditorialContent({
   slug: article.slug,
   title: article.title,
-  excerpt: article.excerpt,
-  content: article.content,
+  excerpt: "",
+  content: "",
   category: article.category,
   categorySlug: article.categorySlug,
   era: article.era,
   date: article.date,
-  readingTime: article.readingTime,
-  author: article.author,
+  readingTime: "1 min read",
+  author: "The Archaeologist Editorial Desk",
   image: article.image,
   sourceUrl: article.sourceUrl,
   sourceImageUrl: article.sourceImageUrl,
