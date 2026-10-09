@@ -115,3 +115,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline:2px solid v
 
 .ad-slot-live { min-height:90px; }
 .ad-slot-live .adsbygoogle { min-height:90px; width:100%; }
+
+.article-content h2 { color:var(--ink); font-family:var(--font-display); font-size:32px; font-weight:400; letter-spacing:-.03em; line-height:1.12; margin:52px 0 18px; }
+@media (max-width:800px) { .article-content h2 { font-size:27px; margin-top:38px; } }

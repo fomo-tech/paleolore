@@ -46,7 +46,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!article || article.status === "draft") notFound();
 
   const allArticles = await getPublishedArticles();
-  const paragraphs = article.content.split(/\n\n+/).map((paragraph) => paragraph.trim()).filter(Boolean);
+  const contentBlocks = article.content.split(/\n\n+/).map((block) => block.trim()).filter(Boolean);
   const related = allArticles.filter((candidate) => candidate.slug !== article.slug && candidate.categorySlug === article.categorySlug).slice(0, 3);
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -62,7 +62,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <nav className="breadcrumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href={"/categories/" + article.categorySlug}>{article.category}</Link><span aria-hidden="true">/</span><span aria-current="page">{article.title}</span></nav>
     <header className="article-header"><div className="article-meta"><span>{article.category}</span><span>{article.era}</span><span>{article.readingTime}</span></div><h1 className="article-title">{article.title}</h1><p className="article-dek">{article.excerpt}</p><div className="article-byline"><span>By {article.author || "The Archaeologist"}</span><time dateTime={article.date || undefined}>{article.date || "Archive note"}</time></div></header>
     {article.image && <figure className="article-cover"><img src={article.image} alt={article.title} width="1600" height="900" fetchPriority="high" /></figure>}
-    <div className="article-content">{paragraphs.map((paragraph, index) => <p className={index === 0 ? "article-lede" : undefined} key={index}>{paragraph}</p>)}</div>
+    <div className="article-content">{contentBlocks.map((block, index) => block.startsWith("## ") ? <h2 key={index}>{block.slice(3)}</h2> : <p className={index === 0 ? "article-lede" : undefined} key={index}>{block}</p>)}</div>
     <div className="share-row"><span>Share this note</span><Link href={"mailto:?subject=" + encodeURIComponent(article.title)}>Email</Link><Link href="/blog">More stories</Link>{article.sourceUrl && <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer">Original source</a>}</div>
     {related.length > 0 && <section className="article-related" aria-labelledby="related-heading"><div className="section-heading"><div><span className="eyebrow">CONTINUE READING</span><h2 id="related-heading">More from the archive</h2></div><Link className="text-link" href="/blog">View all stories</Link></div><div className="related-grid">{related.map((candidate) => <ArticleCard article={candidate} key={candidate.slug} />)}</div></section>}
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleToJsonLd(article)) }} />
