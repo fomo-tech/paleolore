@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export function ArchiveSearch({ initialQuery = "" }: { initialQuery?: string }) {
+export function ArchiveSearch({ initialQuery = "", className = "search-trigger" }: { initialQuery?: string; className?: string }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState(initialQuery);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,7 +29,7 @@ export function ArchiveSearch({ initialQuery = "" }: { initialQuery?: string }) 
   }, [open]);
 
   return <>
-    <button ref={triggerRef} className="search-trigger" type="button" aria-haspopup="dialog" aria-controls="archive-search-dialog" aria-expanded={open} onClick={() => setOpen(true)}>
+    <button ref={triggerRef} className={className} type="button" aria-haspopup="dialog" aria-controls="archive-search-dialog" aria-expanded={open} onClick={() => setOpen(true)}>
       Search the archive <span aria-hidden="true">⌕</span>
     </button>
     {open && <div className="search-modal-backdrop" role="presentation" onMouseDown={closeModal}>
