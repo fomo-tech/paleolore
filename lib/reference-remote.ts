@@ -11,5 +11,7 @@ function archivePlaceholder(slug: string): Article {
 
 export async function fetchReferenceArticle(slug: string): Promise<Article | null> {
   if (!/^[a-z0-9-]+$/i.test(slug)) return null;
+  const sourceUrl = referenceSitemap.find((url) => url.endsWith("/blog/" + slug));
+  if (!sourceUrl) return null;
   return archivePlaceholder(slug);
 }
