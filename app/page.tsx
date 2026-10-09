@@ -6,6 +6,8 @@ import { SiteHeader } from "@/components/site-header";
 import { categories } from "@/lib/content";
 import { getPublishedArticles } from "@/lib/articles";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Archaeology, Prehistory & Ancient Worlds",
   description: "Read clear, carefully sourced stories about archaeology, prehistory, human evolution, artifacts and ancient civilizations.",

@@ -18,7 +18,7 @@ function isoDate(value: string) {
 
 export async function getArticles(options?: { includeDrafts?: boolean }) {
   const mongoArticles = await listMongoArticles();
-  const articles = mongoArticles?.length ? mongoArticles.map(applyEditorialContent) : sampleArticles;
+  const articles = mongoArticles === null ? sampleArticles : mongoArticles.map(applyEditorialContent);
   return options?.includeDrafts ? articles : articles.filter((article) => article.status !== "draft");
 }
 

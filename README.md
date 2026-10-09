@@ -1,22 +1,56 @@
 # The Archaeologist
 
-Tạp chí khảo cổ học và tiền sử xây bằng Next.js/Vinext, có CMS biên tập, MongoDB HTTP adapter, SEO nền tảng và vùng quảng cáo.
+An English archaeology and prehistory magazine built with standard Next.js, a MongoDB-backed editorial CMS, and SEO foundations for organic and social traffic.
 
-## Chạy local
+## Run locally
 
-1. Sao chép `.env.example` thành `.env.local`.
-2. Đặt `ADMIN_PASSWORD` và `ADMIN_SECRET` trước khi dùng CMS.
-3. Chạy `npm run dev`.
+1. Copy `.env.example` to `.env.local`.
+2. Set `ADMIN_PASSWORD` and `ADMIN_SECRET` before using the CMS.
+3. Start the development server:
 
-CMS nằm ở `/admin`. Khi chưa cấu hình MongoDB, site dùng dữ liệu mẫu để preview. Khi đã cấu hình MongoDB HTTP/Data API, bài viết mới được lưu vào collection `articles`.
+```bash
+npm install
+npm run dev
+```
 
-## SEO & Ads
+Open `http://localhost:5173`. The editorial CMS is available at `/admin`.
 
-- `app/sitemap.ts` và `app/robots.ts` tạo sitemap/robots tự động.
-- Bài viết có metadata động và JSON-LD Article.
-- `public/ads.txt` là chỗ thêm dòng publisher sau khi tài khoản quảng cáo được duyệt.
-- `NEXT_PUBLIC_ADSENSE_CLIENT` được gắn vào vùng quảng cáo; cần bổ sung slot/script theo tài khoản Ads thực tế.
+## MongoDB
 
-## Triển khai
+Use a MongoDB connection string in `MONGODB_URI`:
 
-Site dùng cấu hình portable/Vinext của Sites để chạy server-side trên edge. Các biến môi trường production cần đặt trong hosting: `ADMIN_PASSWORD`, `ADMIN_SECRET`, `MONGODB_DATA_API_URL`, `MONGODB_DATA_API_KEY`, `MONGODB_DATA_SOURCE`, `MONGODB_DATABASE`, `MONGODB_COLLECTION`, `NEXT_PUBLIC_SITE_URL`.
+```env
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority
+MONGODB_DATABASE=archaeologist
+MONGODB_COLLECTION=articles
+```
+
+`MONGO_URI` is accepted as a fallback alias. If no MongoDB URI is configured, the public site uses the built-in sample archive so the local preview still works. Once a URI is configured, the MongoDB collection is the source of truth, including an intentionally empty collection.
+
+## SEO and advertising configuration
+
+Set the public URL so canonical links, Open Graph URLs, JSON-LD, sitemap and robots all point to the real domain:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
+```
+
+The app includes:
+
+- Dynamic metadata for the homepage, archive, categories and articles.
+- Canonical URLs, Open Graph/Twitter cards, Article and Breadcrumb JSON-LD.
+- `sitemap.xml` and `robots.txt` generated from the published archive.
+- Noindex handling for admin, search results and placeholder/import-only entries.
+- `public/ads.txt` for the publisher line supplied by the advertising platform.
+
+SEO improves discoverability but cannot guarantee Google indexing or AdSense approval; the site still needs original, useful editorial content, clear policies, author information and a verified domain.
+
+## Production
+
+```bash
+npm run build
+npm start
+```
+
+The production build uses standard Next.js with standalone output enabled. On Vercel, select the repository and add the same environment variables in Project Settings; no custom server command is required.

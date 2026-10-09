@@ -9,6 +9,8 @@ function normalizeSearch(value = "") {
   return value.toLocaleLowerCase("en-US").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").trim();
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ q?: string }> }): Promise<Metadata> {
   const query = (await searchParams).q?.trim();
   const hasQuery = Boolean(query);

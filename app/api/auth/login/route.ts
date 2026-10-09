@@ -1,3 +1,10 @@
 import { NextResponse } from "next/server";
 import { COOKIE_NAME, createSessionToken } from "@/lib/auth";
-export async function POST(request: Request) { const { password } = await request.json().catch(() => ({ password: "" })); if (!password || password !== (process.env.ADMIN_PASSWORD || "change-me-before-deploy")) return NextResponse.json({ error: "Unauthorized" }, { status: 401 }); const response = NextResponse.json({ ok: true }); response.cookies.set(COOKIE_NAME, await createSessionToken(), { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", maxAge: 60 * 60 * 24 * 7, path: "/" }); return response; }
+
+export async function POST(request: Request) {
+  const { password } = (await request.json().catch(() => ({}))) as { password?: string };
+  if (!password || password !== (process.env.ADMIN_PASSWORD || "change-me-before-deploy")) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const response = NextResponse.json({ ok: true });
+  response.cookies.set(COOKIE_NAME, await createSessionToken(), { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", maxAge: 60 * 60 * 24 * 7, path: "/" });
+  return response;
+}

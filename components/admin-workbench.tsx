@@ -1,13 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 
+type AdminResponse = { articles: AdminArticle[] };
+
 type AdminArticle = { id?: string; slug: string; title: string; excerpt: string; content: string; category: string; categorySlug: string; era: string; date: string; readingTime: string; author: string; status: "draft" | "published" };
 const emptyArticle: AdminArticle = { slug: "", title: "", excerpt: "", content: "", category: "Human Prehistory", categorySlug: "prehistory", era: "", date: new Date().toISOString().slice(0, 10), readingTime: "5 min read", author: "The Archaeologist Editorial Desk", status: "draft" };
 
 export function AdminWorkbench() {
   const [password, setPassword] = useState(""); const [loggedIn, setLoggedIn] = useState(false); const [articles, setArticles] = useState<AdminArticle[]>([]); const [article, setArticle] = useState<AdminArticle>(emptyArticle); const [message, setMessage] = useState("");
-  async function load() { const response = await fetch("/api/articles?admin=1"); if (response.ok) { const data = await response.json(); setArticles(data.articles); setLoggedIn(true); } }
-  useEffect(() => { let cancelled = false; fetch("/api/articles?admin=1").then(async (response) => response.ok ? response.json() : null).then((data) => { if (!cancelled && data) { setArticles(data.articles); setLoggedIn(true); } }); return () => { cancelled = true; }; }, []);
+  async function load() { const response = await fetch("/api/articles?admin=1"); if (response.ok) { const data = await response.json(); setArticles((data as AdminResponse).articles); setLoggedIn(true); } }
+  useEffect(() => { let cancelled = false; fetch("/api/articles?admin=1").then(async (response) => response.ok ? response.json() as Promise<AdminResponse> : null).then((data) => { if (!cancelled && data) { setArticles((data as AdminResponse).articles); setLoggedIn(true); } }); return () => { cancelled = true; }; }, []);
   async function login(event: React.FormEvent) { event.preventDefault(); const response = await fetch("/api/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) }); if (!response.ok) return setMessage("Incorrect password."); setMessage("CMS unlocked."); setLoggedIn(true); await load(); }
   function edit(item: AdminArticle) { setArticle(item); window.scrollTo({ top: 0, behavior: "smooth" }); }
   async function save(event: React.FormEvent) { event.preventDefault(); const method = article.id ? "PUT" : "POST"; const endpoint = article.id ? `/api/articles/${article.id}` : "/api/articles"; const response = await fetch(endpoint, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(article) }); if (!response.ok) return setMessage("Could not save the article. Check the connection."); setMessage(article.status === "published" ? "Article published." : "Draft saved."); setArticle(emptyArticle); await load(); }

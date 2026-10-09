@@ -9,6 +9,8 @@ function dateValue(value: string) {
   return Number.isNaN(date.getTime()) ? new Date() : date;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = (await getPublishedArticles()).filter((article) => !article.archivePlaceholder);
   const usedCategories = categories.filter((category) => !category.filterSlug && articles.some((article) => article.categorySlug === category.slug));
