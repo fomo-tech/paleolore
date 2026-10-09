@@ -24,7 +24,7 @@ export function ArchiveSearch({ initialQuery = "" }: { initialQuery?: string }) 
 
   return <>
     <button className="search-trigger" type="button" aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)}>
-      Search
+      Search the archive <span aria-hidden="true">⌕</span>
     </button>
     {open && <div className="search-modal-backdrop" role="presentation" onMouseDown={() => setOpen(false)}>
       <section className="search-modal" role="dialog" aria-modal="true" aria-labelledby="archive-search-title" aria-describedby="archive-search-help" onMouseDown={(event) => event.stopPropagation()}>
