@@ -6,8 +6,9 @@ import { AdSlot } from "@/components/ad-slot";
 import { ArticleCard } from "@/components/article-card";
 import { SiteHeader } from "@/components/site-header";
 import { articleToJsonLd, getArticleBySlug, getPublishedArticles } from "@/lib/articles";
+import { getSiteUrl } from "@/lib/site-url";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
+const siteUrl = getSiteUrl();
 
 export const dynamicParams = true;
 export const dynamic = "force-dynamic";

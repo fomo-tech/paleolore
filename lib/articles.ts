@@ -1,8 +1,9 @@
 import { findMongoArticle, listMongoArticles } from "./mongo";
 import { applyEditorialContent, sampleArticles, type Article } from "./content";
 import { fetchReferenceArticle } from "./reference-remote";
+import { getSiteUrl } from "./site-url";
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
+const SITE_URL = getSiteUrl();
 
 function absoluteUrl(value?: string) {
   if (!value) return undefined;

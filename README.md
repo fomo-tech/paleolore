@@ -32,7 +32,7 @@ MONGODB_COLLECTION=articles
 Set the public URL so canonical links, Open Graph URLs, JSON-LD, sitemap and robots all point to the real domain:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+NEXT_PUBLIC_SITE_URL=https://prehistorictimes.com
 NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
 ```
 

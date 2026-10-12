@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { categories } from "@/lib/content";
 import { getPublishedArticles } from "@/lib/articles";
+import { getSiteUrl } from "@/lib/site-url";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://thearchaeologist.thegoatfx-stategy.chatgpt.site").replace(/\/$/, "");
+const siteUrl = getSiteUrl();
 
 function dateValue(value: string) {
   const date = new Date(value);
