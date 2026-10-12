@@ -46,6 +46,9 @@ The app includes:
 
 SEO improves discoverability but cannot guarantee Google indexing or AdSense approval; the site still needs original, useful editorial content, clear policies, author information and a verified domain.
 
+## Production article import
+
+The Vercel build runs `npm run postbuild`, which idempotently seeds the 30 editorial articles into the configured MongoDB collection. It inserts missing slugs only and does not overwrite existing documents. This requires `MONGODB_URI` to be configured in Vercel and reachable from Vercel; without it, the seed step safely skips.
 ## Production
 
 ```bash

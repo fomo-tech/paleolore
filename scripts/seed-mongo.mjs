@@ -34,7 +34,13 @@ const articles = referenceSite.articles.map((sourceArticle, index) => {
   };
 });
 
-const uri = process.env.MONGODB_URI || process.env.MONGO_URI || "mongodb://127.0.0.1:27017";
+const configuredUri = process.env.MONGODB_URI || process.env.MONGO_URI || "";
+const automatic = process.argv.includes("--automatic");
+if (automatic && !configuredUri) {
+  console.log("MongoDB URI is not configured; skipping automatic production seed.");
+  process.exit(0);
+}
+const uri = configuredUri || "mongodb://127.0.0.1:27017";
 const databaseName = process.env.MONGODB_DATABASE || process.env.MONGO_DATABASE || "archaeologist";
 const collectionName = process.env.MONGODB_COLLECTION || "articles";
 const client = new MongoClient(uri);

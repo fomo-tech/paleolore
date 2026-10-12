@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
-    "db:seed": "node scripts/seed-mongo.mjs"
+    "db:seed": "node scripts/seed-mongo.mjs",
+    "postbuild": "node scripts/seed-mongo.mjs --automatic"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
