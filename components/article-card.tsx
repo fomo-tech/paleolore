@@ -10,7 +10,6 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
       {article.image && isLocalImage && <Image src={article.image} alt={article.title} fill sizes={featured ? "(max-width: 800px) 100vw, 65vw" : "(max-width: 800px) 100vw, 35vw"} priority={featured} />}
       {article.image && !isLocalImage && <img src={article.image} alt={article.title} loading={featured ? "eager" : "lazy"} decoding="async" />}
       <span className="image-wash" aria-hidden="true" />
-      <span className="image-label">{article.era}</span>
     </Link>
     <div className="article-card-body"><div className="article-meta"><span>{article.category}</span><span>{article.readingTime}</span></div><h3><Link href={"/blog/" + article.slug}>{article.title}</Link></h3><p>{article.excerpt}</p><div className="article-byline"><span>{article.author}</span><span>{article.date || "Archive note"}</span></div><Link className="card-read-link" href={"/blog/" + article.slug}>Read field note <span aria-hidden="true">↗</span></Link></div>
   </article>;

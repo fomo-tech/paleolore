@@ -1,4 +1,4 @@
-const FALLBACK_SITE_URL = "https://prehistorictimes.com";
+const FALLBACK_SITE_URL = "https://www.paleolore.com";
 
 function normalizeSiteUrl(value: string) {
   try {
