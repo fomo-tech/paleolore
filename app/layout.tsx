@@ -5,7 +5,7 @@ import { getSiteUrl } from "@/lib/site-url";
 const siteUrl = getSiteUrl();
 const siteTitle = "PaleoLore — Archaeology & Prehistory Magazine";
 const siteDescription = "An independent English magazine about archaeology, prehistory, artifacts, paleontology and ancient civilizations.";
-const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-2592663244519669";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     images: [{ url: siteUrl + "/archaeologist-logo.png", width: 512, height: 512, alt: "PaleoLore prehistoric stone logo" }],
   },
   twitter: { card: "summary_large_image", title: siteTitle, description: siteDescription, images: [siteUrl + "/archaeologist-logo.png"] },
+  other: {
+    "google-adsense-account": "ca-pub-2592663244519669",
+  },
 };
 
 const structuredData = {
