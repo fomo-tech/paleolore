@@ -22,7 +22,7 @@ export function AdSlot({ label = "Advertising space" }: { label?: string }) {
   }, [client, slot]);
 
   if (!client || !slot) {
-    return <div className="ad-slot" aria-label={label}><span>{label}</span><small>300 × 250</small></div>;
+    return null;
   }
 
   return <div className="ad-slot ad-slot-live" aria-label={label}><ins className="adsbygoogle" style={{ display: "block" }} data-ad-client={client} data-ad-slot={slot} data-ad-format="auto" data-full-width-responsive="true" /></div>;

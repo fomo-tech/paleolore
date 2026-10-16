@@ -46,10 +46,10 @@ export function articleToJsonLd(article: Article) {
     description: article.excerpt,
     ...(image ? { image: [image] } : {}),
     ...(published ? { datePublished: published, dateModified: published } : {}),
-    author: { "@type": "Person", name: article.author || "The Archaeologist" },
+    author: { "@type": "Person", name: article.author || "PaleoLore Editorial Desk" },
     publisher: {
       "@type": "Organization",
-      name: "The Archaeologist",
+      name: "PaleoLore",
       url: SITE_URL,
       logo: { "@type": "ImageObject", url: SITE_URL + "/archaeologist-logo.png" },
     },

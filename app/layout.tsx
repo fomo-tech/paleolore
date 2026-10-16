@@ -3,18 +3,18 @@ import "./globals.css";
 import { getSiteUrl } from "@/lib/site-url";
 
 const siteUrl = getSiteUrl();
-const siteTitle = "The Archaeologist — Archaeology & Prehistory Magazine";
+const siteTitle = "PaleoLore — Archaeology & Prehistory Magazine";
 const siteDescription = "An independent English magazine about archaeology, prehistory, artifacts, paleontology and ancient civilizations.";
 const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: siteTitle, template: "%s | The Archaeologist" },
+  title: { default: siteTitle, template: "%s | PaleoLore" },
   description: siteDescription,
   keywords: ["archaeology", "prehistory", "paleontology", "artifacts", "ancient civilizations", "human evolution"],
-  authors: [{ name: "The Archaeologist" }],
-  creator: "The Archaeologist",
-  publisher: "The Archaeologist",
+  authors: [{ name: "PaleoLore Editorial Desk" }],
+  creator: "PaleoLore",
+  publisher: "PaleoLore",
   alternates: { canonical: "/" },
   icons: { icon: "/archaeologist-logo.png", shortcut: "/archaeologist-logo.png" },
   robots: {
@@ -24,12 +24,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    siteName: "The Archaeologist",
+    siteName: "PaleoLore",
     title: siteTitle,
     description: siteDescription,
     url: siteUrl,
     locale: "en_US",
-    images: [{ url: siteUrl + "/archaeologist-logo.png", width: 512, height: 512, alt: "The Archaeologist prehistoric stone logo" }],
+    images: [{ url: siteUrl + "/archaeologist-logo.png", width: 512, height: 512, alt: "PaleoLore prehistoric stone logo" }],
   },
   twitter: { card: "summary_large_image", title: siteTitle, description: siteDescription, images: [siteUrl + "/archaeologist-logo.png"] },
 };
@@ -37,10 +37,10 @@ export const metadata: Metadata = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "The Archaeologist",
+  name: "PaleoLore",
   url: siteUrl,
   description: siteDescription,
-  publisher: { "@type": "Organization", name: "The Archaeologist", url: siteUrl, logo: { "@type": "ImageObject", url: siteUrl + "/archaeologist-logo.png" } },
+  publisher: { "@type": "Organization", name: "PaleoLore", url: siteUrl, logo: { "@type": "ImageObject", url: siteUrl + "/archaeologist-logo.png" } },
   potentialAction: { "@type": "SearchAction", target: siteUrl + "/blog?q={search_term_string}", "query-input": "required name=search_term_string" },
 };
 

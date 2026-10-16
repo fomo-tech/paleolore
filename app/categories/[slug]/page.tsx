@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!category) return {};
   return {
     title: category.name,
-    description: "Explore " + category.name.toLowerCase() + " stories from The Archaeologist archive.",
+    description: "Explore " + category.name.toLowerCase() + " stories from the PaleoLore archive.",
     alternates: { canonical: "/categories/" + category.slug },
     robots: category.filterSlug ? { index: false, follow: true } : undefined,
   };
